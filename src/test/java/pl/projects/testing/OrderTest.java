@@ -1,8 +1,10 @@
 package pl.projects.testing;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +12,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(BeforeAfterExtension.class)
 class OrderTest {
+
+    private Order order;
+
+    @BeforeEach
+    void initializeOrder() {
+        System.out.println("Before each");
+        order = new Order();
+    }
+
+    @AfterEach
+    void cleanUp() {
+        System.out.println("After each");
+        order.cancel();
+    }
 
     @Test
     void testAssertArraysEqual() {
@@ -21,7 +38,6 @@ class OrderTest {
 
     @Test
     void mealListShouldBeEmptyAfterCreationOfOrder() {
-        Order order = new Order();
         assertThat(order.getMeals(), empty());
         assertThat(order.getMeals().size(), equalTo(0));
         assertThat(order.getMeals(), hasSize(0));
@@ -31,7 +47,6 @@ class OrderTest {
     @Test
     void addingMealToOrderShouldIncreaseOrderSize() {
         Meal meal = new Meal(15, "Burger");
-        Order order = new Order();
 
         order.addMealToOrder(meal);
         assertThat(order.getMeals(), hasSize(1));
@@ -44,7 +59,6 @@ class OrderTest {
     @Test
     void removingMealFromOrderShouldDecreaseOrderSize() {
         Meal meal = new Meal(15,"Burger");
-        Order order = new Order();
 
         order.addMealToOrder(meal);
         order.removeMealFromOrder(meal);
@@ -57,7 +71,6 @@ class OrderTest {
     void mealsShouldBeInCorrectOrderAfterAddingThemToOrder() {
         Meal meal = new Meal(15,"Burger");
         Meal meal1 = new Meal(10, "Pizza");
-        Order order = new Order();
 
         order.addMealToOrder(meal);
         order.addMealToOrder(meal1);
