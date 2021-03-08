@@ -1,4 +1,4 @@
-package pl.projects.testing;
+package pl.projects.testing.account;
 
 public class Address {
 

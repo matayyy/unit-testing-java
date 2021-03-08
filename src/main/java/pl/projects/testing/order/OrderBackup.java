@@ -1,4 +1,4 @@
-package pl.projects.testing;
+package pl.projects.testing.order;
 
 import java.io.*;
 
@@ -18,6 +18,9 @@ public class OrderBackup {
     }
 
     void backupOrder(Order order) throws IOException {
+        if(writer == null) {
+            throw new IOException("Backup File not created");
+        }
         writer.append(order.toString());
     }
 

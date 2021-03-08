@@ -1,4 +1,4 @@
-package pl.projects.testing;
+package pl.projects.testing.extensions;
 
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;

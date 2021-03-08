@@ -1,8 +1,11 @@
-package pl.projects.testing;
+package pl.projects.testing.cart;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pl.projects.testing.Meal;
+import pl.projects.testing.cart.Cart;
+import pl.projects.testing.order.Order;
 
 import java.time.Duration;
 import java.util.List;

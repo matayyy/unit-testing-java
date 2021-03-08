@@ -1,8 +1,10 @@
-package pl.projects.testing;
+package pl.projects.testing.account;
 
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import pl.projects.testing.account.Account;
+import pl.projects.testing.account.Address;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -54,6 +56,22 @@ class AccountTest {
         assumingThat(address != null, () -> {
             assertTrue(account.isActive());
         });
+    }
+
+    @Test
+    void invalidEmailShouldThrowException() {
+        Account account = new Account();
+
+        assertThrows(IllegalArgumentException.class, () -> account.setEmail("wrongEmail@.com"));
+    }
+
+    @Test
+    void validEmailShouldBeSet() {
+        Account account = new Account();
+
+        account.setEmail("mielewczyk.mat@gmail.com");
+
+        assertEquals("mielewczyk.mat@gmail.com", account.getEmail());
     }
 
 }

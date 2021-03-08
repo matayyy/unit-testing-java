@@ -1,9 +1,13 @@
-package pl.projects.testing;
+package pl.projects.testing.order;
 
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import pl.projects.testing.Meal;
+import pl.projects.testing.extensions.BeforeAfterExtension;
+import pl.projects.testing.order.Order;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +45,7 @@ class OrderTest {
         assertThat(order.getMeals(), empty());
         assertThat(order.getMeals().size(), equalTo(0));
         assertThat(order.getMeals(), hasSize(0));
-        assertThat(order.getMeals(), emptyCollectionOf(Meal.class));
+        MatcherAssert.assertThat(order.getMeals(), emptyCollectionOf(Meal.class));
     }
 
     @Test
@@ -89,6 +93,34 @@ class OrderTest {
         List<Meal> meals2 = Arrays.asList(meal,meal1);
 
         assertThat(meals1, is(meals2));
+    }
+
+    @Test
+    void orderTotalPriceShouldNotExceedsMaxIntValue() {
+        Meal meal1 = new Meal(Integer.MAX_VALUE, "Pizza");
+        Meal meal2 = new Meal(30,"Fish");
+
+        order.addMealToOrder(meal1);
+        order.addMealToOrder(meal2);
+
+        assertThrows(IllegalStateException.class, () -> order.totalPrice());
+    }
+
+    @Test
+    void emptyOrderTotalPriceShouldEqualZero() {
+        assertEquals(0, order.totalPrice());
+    }
+
+    @Test
+    void cancelingOrderShouldRemoveAllItemsFromMealsList() {
+        Meal meal1 = new Meal(300, "Pizza");
+        Meal meal2 = new Meal(30,"Fish");
+
+        order.addMealToOrder(meal1);
+        order.addMealToOrder(meal2);
+        order.cancel();
+
+        assertThat(order.getMeals().size(), is(0));
     }
 
 }

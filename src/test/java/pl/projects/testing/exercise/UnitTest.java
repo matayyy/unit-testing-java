@@ -60,8 +60,8 @@ class UnitTest {
         unit.move(20, 20);
         unit.tankUp();
 
-        assertTrue(unit.getFuel() >= 50);
-        assertTrue(unit.getFuel() < 60);
+        assertTrue(unit.getFuel() >= 60);
+        assertTrue(unit.getFuel() <= 70);
         //assertNotEquals(60, unit.getFuel());
     }
 
