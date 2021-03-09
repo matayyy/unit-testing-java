@@ -72,4 +72,12 @@ public class Unit {
     int getLoad() {
         return this.currentCargoWeight;
     }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public List<Cargo> getCargo() {
+        return cargo;
+    }
 }

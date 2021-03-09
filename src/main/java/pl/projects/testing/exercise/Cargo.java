@@ -31,4 +31,8 @@ public class Cargo {
     public int getWeight() {
         return weight;
     }
+
+    public String getName() {
+        return name;
+    }
 }
